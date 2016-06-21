@@ -1,5 +1,5 @@
 // MODULE
-var rssApp = angular.module('rssApp', ['ngRoute', 'ngResource','angularMoment']);
+var rssApp = angular.module('rssApp', ['ngRoute', 'ngResource','angularMoment','infinite-scroll']);
 
 // ROUTES
 rssApp.config(function ($routeProvider){
@@ -13,8 +13,9 @@ rssApp.config(function ($routeProvider){
 // CONTROLLERS
 rssApp.controller('homeController', ['$scope','$http', function($scope,$http){
   $scope.enteries=[];
-  $scope.getItem = function(){
-    var url = 'http://rss.cnn.com/rss/edition.rss'
+
+  $scope.loadMore = function(){
+  var url = 'http://rss.cnn.com/rss/edition.rss'
   feednami.load(url,function(result){
     if(result.error){
       console.log(result.error)
@@ -37,7 +38,7 @@ rssApp.controller('homeController', ['$scope','$http', function($scope,$http){
     }
   })
 };
-$scope.getItem();
+$scope.loadMore();
 
 }]);
 
