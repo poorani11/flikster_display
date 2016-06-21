@@ -2,9 +2,10 @@
   <h2>CNN Feed</h2>
   <ul class="list-group">
     <li class="list-group-item" ng-repeat="entry in entries">
-        <a ng-href="{{entry.link}}" target="_blank"><b>{{entry.title}}</b></a><br>
+        <a ng-href="{{entry.link}}" target="_blank"><b>{{entry.title}}</b></a>
+        <br>
         <span>{{entry.summary}}</span><br>
-        <small style="color:red">{{entry.date | date:'medium'}}
+        <small style="color:red"><span am-time-ago="entry.pubdate"></span></small>
     </li>
   </ul>
 </div>

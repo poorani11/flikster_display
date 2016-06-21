@@ -1,5 +1,5 @@
 // MODULE
-var rssApp = angular.module('rssApp', ['ngRoute', 'ngResource']);
+var rssApp = angular.module('rssApp', ['ngRoute', 'ngResource','angularMoment']);
 
 // ROUTES
 rssApp.config(function ($routeProvider){
