@@ -27,6 +27,7 @@ rssApp.controller('homeController', ['$scope','$http', function($scope,$http){
       for(var i = 0; i < $scope.entries.length; i++){
         var entry = $scope.entries[i]
         console.log(entry.title);
+         console.log(entry.summary) 
       }
     }
   })

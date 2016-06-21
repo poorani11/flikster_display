@@ -1,9 +1,10 @@
 <div class="container" ng-controller="homeController">
-  <h2>Basic List Group</h2>
+  <h2>CNN Feed</h2>
   <ul class="list-group">
     <li class="list-group-item" ng-repeat="entry in entries">
-        <b>{{entry.title}}</b><br>
-        <span ng-ng-bind="user.namebind-html="entry.contentSnippet"></span>
+        <a href={{entry.link}}><b>{{entry.title}}</b></a><br>
+        <span>{{entry.summary}}</span><br>
+        <small style="color:red">{{entry.date | date:'medium'}}
     </li>
   </ul>
 </div>
