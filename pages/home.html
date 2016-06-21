@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container" ng-controller="homeController">
   <h2>Basic List Group</h2>
   <ul class="list-group">
     <li class="list-group-item" ng-repeat="entry in entries">
-        <h1 ng-bind="entry.title"></h1><br>
+        <b>{{entry.title}}</b><br>
         <span ng-ng-bind="user.namebind-html="entry.contentSnippet"></span>
     </li>
   </ul>
