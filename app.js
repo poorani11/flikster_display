@@ -26,6 +26,7 @@ rssApp.controller('homeController', ['$scope','$http', function($scope,$http){
       $scope.entries = result.feed.entries;
       window.localStorage["entries"] = JSON.stringify(result.feed.entries);
        $scope.$apply(function () {
+        // $scope.entries = _.sortBy($scope.entries, function(el) { return el.pubdate; });
            console.log($scope.entries);
         });
       // // for(var i = 0; i < $scope.entries.length; i++){
