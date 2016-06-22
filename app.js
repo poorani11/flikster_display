@@ -26,9 +26,10 @@ rssApp.controller('homeController', ['$scope','$http', function($scope,$http){
     }
     else{
       $scope.entries = result.feed.entries;
-       angular.forEach(result.feed.entries, function(value) {
-            value.sampleImage =$(value.content).find('img').eq(0).attr('src');
-        });  
+       // angular.forEach(result.feed.entries, function(value) {
+       //      value.sampleImage =$(value.content).find('img').eq(0).attr('src');
+       //      console.log(value.sampleImage);
+       //  });  
       window.localStorage["entries"] = JSON.stringify(result.feed.entries);
        $scope.$apply(function () {
         // $scope.entries = _.sortBy($scope.entries, function(el) { return el.pubdate; });
