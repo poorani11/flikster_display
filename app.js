@@ -12,11 +12,12 @@ rssApp.config(function ($routeProvider){
 });                  
 // CONTROLLERS
 rssApp.controller('homeController', ['$scope','$http', function($scope,$http){
-  $scope.enteries=[];
+  $scope.entries=[];
+  $scope.newEnteries = [];
 
-  $scope.loadMore = function(){
-  var url = 'http://rss.cnn.com/rss/edition.rss'
-  feednami.load(url,function(result){
+  $scope.getItem = function(){
+  var url = 'http://www.thehindu.com/?service=rss'
+   feednami.load(url,function(result){
     if(result.error){
       console.log(result.error)
       if(window.localStorage["entries"] !== undefined){
@@ -25,6 +26,9 @@ rssApp.controller('homeController', ['$scope','$http', function($scope,$http){
     }
     else{
       $scope.entries = result.feed.entries;
+       angular.forEach(result.feed.entries, function(value) {
+            value.sampleImage =$(value.content).find('img').eq(0).attr('src');
+        });  
       window.localStorage["entries"] = JSON.stringify(result.feed.entries);
        $scope.$apply(function () {
         // $scope.entries = _.sortBy($scope.entries, function(el) { return el.pubdate; });
@@ -38,7 +42,7 @@ rssApp.controller('homeController', ['$scope','$http', function($scope,$http){
     }
   })
 };
-$scope.loadMore();
+$scope.getItem();
 
 }]);
 
