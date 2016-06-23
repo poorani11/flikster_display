@@ -42,7 +42,7 @@ rssApp.controller('homeController', ['$scope','$http', function($scope,$http){
   $scope.myPagingFunction=function(){
     var length = $scope.newEntry.length - 1;
 
-    if($scope.entries.length < length){
+    if($scope.entries.length > length){
       for(var i = 1; i <= 25; i++) {
         $scope.newEntry.push($scope.entries[length + i]);
       }
