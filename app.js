@@ -26,7 +26,7 @@ rssApp.controller('homeController', ['$scope','$http','_', function($scope,$http
         }
       } else {
         $scope.entries = result.feed.entries;
-        _.sortBy($scope.entries, function(o) { return o.pubdate; });
+        $scope.entries =_.sortBy($scope.entries, function(o) { return o.pubdate }).reverse();
         for(var i = 0; i < length; i++){
           var entry = $scope.entries[i]
           $scope.newEntry.push(entry);
