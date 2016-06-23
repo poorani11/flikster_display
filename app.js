@@ -1,5 +1,5 @@
 // MODULE
-var rssApp = angular.module('rssApp', ['ngRoute', 'ngResource','angularMoment','infinite-scroll']);
+var rssApp = angular.module('rssApp', ['ngRoute', 'ngResource','angularMoment','infinite-scroll','lodash']);
 
 // ROUTES
 rssApp.config(function ($routeProvider){
@@ -11,7 +11,7 @@ rssApp.config(function ($routeProvider){
   }) 
 });                  
 // CONTROLLERS
-rssApp.controller('homeController', ['$scope','$http', function($scope,$http){
+rssApp.controller('homeController', ['$scope','$http','_', function($scope,$http,_){
   $scope.entries=[];
   $scope.newEntry = [];
   length=25;
@@ -26,6 +26,7 @@ rssApp.controller('homeController', ['$scope','$http', function($scope,$http){
         }
       } else {
         $scope.entries = result.feed.entries;
+        _.sortBy($scope.entries, function(o) { return o.pubdate; });
         for(var i = 0; i < length; i++){
           var entry = $scope.entries[i]
           $scope.newEntry.push(entry);
