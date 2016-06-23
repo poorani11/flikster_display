@@ -1,11 +1,13 @@
 <div class="container" ng-controller="homeController">
   <h2>Hindu Feed</h2>
-  <ul class="list-group">
-    <li class="list-group-item" ng-repeat="entry in entries |  orderBy:'-pubdate'">
-        <a ng-href="{{entry.link}}" target="_blank"><b>{{entry.title}}</b></a>
-        <br>
-        <span>{{entry.summary}}</span><br>
-        <small style="color:red"><span am-time-ago="entry.pubdate"></span></small>
-    </li>
-  </ul>
+  <div infinite-scroll="myPagingFunction()" style="min-height:100vh;">
+	  <ul class="list-group">
+	    <li class="list-group-item" ng-repeat="entry in newEntry track by $index |  orderBy:'-pubdate'">
+	        <a ng-href="{{entry.link}}" target="_blank"><b>{{entry.title}}</b></a>
+	        <br>
+	        <span>{{entry.summary}}</span><br>
+	        <small style="color:red"><span am-time-ago="entry.pubdate"></span></small>
+	    </li>
+	  </ul>
+  </div>
 </div>

@@ -4,46 +4,51 @@ var rssApp = angular.module('rssApp', ['ngRoute', 'ngResource','angularMoment','
 // ROUTES
 rssApp.config(function ($routeProvider){
 
-    $routeProvider
+  $routeProvider
 
-    .when('/', {
-        templateUrl: 'pages/home.html',
-    }) 
+  .when('/', {
+    templateUrl: 'pages/home.html',
+  }) 
 });                  
 // CONTROLLERS
 rssApp.controller('homeController', ['$scope','$http', function($scope,$http){
   $scope.entries=[];
-  $scope.newEnteries = [];
+  $scope.newEntry = [];
+  length=25;
 
   $scope.getItem = function(){
-  var url = 'http://www.thehindu.com/?service=rss'
-   feednami.load(url,function(result){
-    if(result.error){
-      console.log(result.error)
-      if(window.localStorage["entries"] !== undefined){
-        $scope.entries = JSON.parse(window.localStorage["entries"]);
+    var url = 'http://www.thehindu.com/?service=rss'
+    feednami.load(url,function(result){
+      if(result.error){
+        console.log(result.error)
+        if(window.localStorage["entries"] !== undefined){
+          $scope.entries = JSON.parse(window.localStorage["entries"]);
+        }
+      } else {
+        $scope.entries = result.feed.entries;
+        for(var i = 0; i < length; i++){
+          var entry = $scope.entries[i]
+          $scope.newEntry.push(entry);
+        }
+        $scope.$apply(function () {
+        $scope.newEntry = $scope.newEntry;
+      });
+      }
+    })
+  };
+
+  $scope.getItem();
+
+  $scope.myPagingFunction=function(){
+    var length = $scope.newEntry.length - 1;
+
+    if($scope.entries.length < length){
+      for(var i = 1; i <= 25; i++) {
+        $scope.newEntry.push($scope.entries[length + i]);
       }
     }
-    else{
-      $scope.entries = result.feed.entries;
-       // angular.forEach(result.feed.entries, function(value) {
-       //      value.sampleImage =$(value.content).find('img').eq(0).attr('src');
-       //      console.log(value.sampleImage);
-       //  });  
-      window.localStorage["entries"] = JSON.stringify(result.feed.entries);
-       $scope.$apply(function () {
-        // $scope.entries = _.sortBy($scope.entries, function(el) { return el.pubdate; });
-           console.log($scope.entries);
-        });
-      // // for(var i = 0; i < $scope.entries.length; i++){
-      // //   var entry = $scope.entries[i]
-      // //   console.log(entry.title);
-      // //    console.log(entry.summary) 
-      // }
-    }
-  })
-};
-$scope.getItem();
+  }
+
 
 }]);
 
